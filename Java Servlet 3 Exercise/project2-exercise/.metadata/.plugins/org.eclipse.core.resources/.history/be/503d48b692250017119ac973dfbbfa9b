@@ -1,0 +1,5 @@
+package com.mitrais.servlet;
+
+public class WebContext {
+
+}
