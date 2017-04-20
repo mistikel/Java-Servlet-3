@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Servlet
  */
 @WebServlet(description = "This is example servlet", urlPatterns = { "/Servlet" })
-@MultipartConfig
 public class Servlet extends HttpServlet implements javax.servlet.Servlet {
 	private static final long serialVersionUID = 1L;
 	private List<Data> a;
@@ -37,24 +34,12 @@ public class Servlet extends HttpServlet implements javax.servlet.Servlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter writer = resp.getWriter();
-		resp.setContentType("application/json");
-		resp.setCharacterEncoding("utf-8");
 		String value = req.getParameter("name");
 		System.out.println(value);
-		Data filt =a.stream().filter(c -> c.getName().equals(value)).findFirst().orElse(null);
-		JsonObject obj = new JsonObject();
-		Gson json = new Gson();
-		if(filt==null){
-			obj.add("Data", json.toJsonTree("Not Found"));
-		}else{
-			obj.add("Data", json.toJsonTree(filt));
-		}
-		
-		obj.add("Message",json.toJsonTree("hello from servlet"));
-		String jsonWithGson = json.toJson(obj);
-		writer.println(jsonWithGson);
+		//a.stream().filter(c -> c.getName().equals(value));
 	}
+
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
