@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,12 +34,11 @@ public class Servlet extends HttpServlet implements javax.servlet.Servlet {
 			data.setName("name"+(i+1));
 			a.add(data);
 		}
-		JsonObject obj = new JsonObject();
 		Gson json = new Gson();
-		obj.add("Data", json.toJsonTree(a));
-		obj.add("Message",json.toJsonTree("hello from servlet"));
-		String jsonWithGson = json.toJson(obj);
-		writer.println(jsonWithGson);
+		String jsonWithGson = json.toJson(a);
+		//write with Gson
+		String object = "{\"data\":["+jsonWithGson+"],\"message\":\"hello from servlet\"}";
+		writer.println(object);
 	}
 }
 

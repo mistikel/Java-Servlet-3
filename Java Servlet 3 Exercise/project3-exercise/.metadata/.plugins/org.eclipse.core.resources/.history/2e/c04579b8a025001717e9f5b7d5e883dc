@@ -38,9 +38,10 @@ public class Servlet extends HttpServlet implements javax.servlet.Servlet {
 		JsonObject obj = new JsonObject();
 		Gson json = new Gson();
 		obj.add("Data", json.toJsonTree(a));
-		obj.add("Message",json.toJsonTree("hello from servlet"));
-		String jsonWithGson = json.toJson(obj);
-		writer.println(jsonWithGson);
+		String jsonWithGson = json.toJson(a);
+		//write with Gson
+		String object = "{\"data\":["+jsonWithGson+"],\"message\":\"hello from servlet\"}";
+		writer.println(object);
 	}
 }
 
