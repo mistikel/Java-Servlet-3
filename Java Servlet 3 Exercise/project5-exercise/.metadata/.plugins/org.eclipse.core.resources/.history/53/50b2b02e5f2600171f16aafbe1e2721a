@@ -1,0 +1,14 @@
+package com.mitrais.jsf;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class CrudBook implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Book> book;
+	private Book item = new Book();
+}

@@ -1,0 +1,29 @@
+package com.mitrais.jsf;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+public class CrudBook implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Book> book;
+	private Book item = new Book();
+	private Book beforeEdit = null;
+	private boolean edit = false;
+	
+	@PostConstruct
+	public void init(){
+		book = new ArrayList<Book>();
+	}
+	
+	public void add(){
+		item.setId(book.isEmpty() ? 1 : book.get(book.size()-1).getId()+1 );
+		book.add(item);
+	}
+}

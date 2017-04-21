@@ -1,0 +1,72 @@
+package com.mitrais.jsf;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import com.song.jsf.example.Student;
+
+public class CrudBook implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Book> book;
+	private Book item = new Book();
+	private Book beforeEdit = null;
+	private boolean edit = false;
+	
+	@PostConstruct
+	public void init(){
+		book = new ArrayList<Book>();
+	}
+	
+	public void add(){
+		item.setId(book.isEmpty() ? 1 : book.get(book.size()-1).getId()+1 );
+		book.add(item);
+		item = new Book();
+	}
+	
+	public void resetAdd() {
+    	item = new Book();
+    }
+
+    public void edit(Book item) {
+    	beforeEdit = (Book) item.clone();
+        this.item = item;
+        edit = true;
+    }
+
+    public void cancelEdit() {
+    	this.item.restore(beforeEditItem);
+        this.item = new Student();
+        edit = false;
+    }
+
+    public void saveEdit() {
+    	// DAO save the edit
+        this.item = new Student();
+        edit = false;
+    }
+
+    public void delete(Student item) throws IOException {
+    	// DAO save the delete
+        list.remove(item);
+    }
+
+    public List<Student> getList() {
+        return list;
+    }
+
+    public Student getItem() {
+        return this.item;
+    }
+
+    public boolean isEdit() {
+        return this.edit;
+    }
+}

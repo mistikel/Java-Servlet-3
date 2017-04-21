@@ -1,0 +1,48 @@
+package com.mitrais.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet
+ */
+@WebServlet("/Servlet")
+public class Servlet extends HttpServlet implements javax.servlet.Servlet {
+	/**
+	 * 
+	 */
+	private List<String> name;
+	private static final long serialVersionUID = 1L;
+	public Servlet() {
+		name = new ArrayList<String>();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().setAttribute("greeting", "hello");
+		request.getRequestDispatcher("/hello.jsp").forward(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=UTF-8");
+		if(req.getParameter("name")!=null){
+			name.add(req.getParameter("name"));
+		}else{
+			name.remove(req.getParameter("delete"));
+		}
+		req.getSession().setAttribute("name", name);
+		req.getRequestDispatcher("/hello.jsp").forward(req, resp);
+	}
+	
+}
+

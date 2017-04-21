@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome Page</title>
+</head>
+<body>
+	<h1>This is my app.</h1>
+	<h2>I have said Hello</h2>
+</body>
+</html>

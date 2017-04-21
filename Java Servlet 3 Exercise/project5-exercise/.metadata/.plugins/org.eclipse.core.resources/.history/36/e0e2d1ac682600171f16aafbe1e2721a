@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<head>
+	<title>Simple CRUD</title>
+</head>
+
+<body>
+	<h:panelGroup rendered="#{!crudBook.edit}">
+		<h3>Add student</h3>
+		<h:form>
+			<p>ISBN: <h:inputText value="#{crudBook.item.ISBN}" /></p>
+			<p>Title: <h:inputText value="#{crudBook.item.title}" /></p>
+			<p>Author: <h:inputText value="#{crudBook.item.author}" /></p>
+			<p>Publisher: <h:inputText value="#{crudBook.item.publisher}" /></p>
+			<p>Price: $<h:inputText value="#{crudBook.item.price}" /></p>
+			<p>
+				<h:commandButton value="add" action="#{crudBook.add}" />
+				<h:commandButton value="reset" action="#{crudBook.resetAdd}" />
+			</p>
+		</h:form>
+	</h:panelGroup>
+	
+	<h:panelGroup rendered="#{crudBook.edit}">
+		<h3>Edit student #{crudBook.item.id}</h3>
+		<h:form>
+			<p>Name: <h:inputText value="#{crudBook.item.name}" /></p>
+			<p>
+				<h:commandButton value="save" action="#{crudBook.saveEdit}" />
+				<h:commandButton value="cancel" action="#{crudBook.cancelEdit}" />
+			</p>
+		</h:form>
+	</h:panelGroup>
+	<h3>List students</h3>
+	<h:form rendered="#{not empty crudBook.list}">
+		<h:dataTable value="#{crudBook.list}" var="item">
+			<h:column><f:facet name="header">ID</f:facet>#{item.id}</h:column>
+			<h:column><f:facet name="header">Name</f:facet>#{item.title}</h:column>
+			<h:column>
+				<h:commandButton value="edit" action="#{crudBook.edit(item)}" />
+			</h:column>
+			<h:column>
+				<h:commandButton value="delete" action="#{crudBook.delete(item)}" />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+	<h:panelGroup rendered="#{empty crudBook.list}">
+		<p>No students! Please add students.</p>
+	</h:panelGroup>
+</body>
+</html>

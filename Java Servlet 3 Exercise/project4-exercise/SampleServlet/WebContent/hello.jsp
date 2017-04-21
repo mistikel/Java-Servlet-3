@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Add Student</h2>
+<form name="form" action="Servlet" method="post">
+	Name : <input type="text" name="name">
+	<br>
+	<br>
+	<input type="submit" name="submit" value="add">
+	<br>
+	<br>
+</form>
+<ul>
+<c:forEach items="${name}" var="name">
+        <li>${name}</li>
+        <br>
+        <form action="Servlet" method="post">
+        <input type="hidden" name="delete" value="${name}">
+		<input type="submit" name="remove" value="remove">
+		</form>
+</c:forEach>
+</ul>
+<br>
+
+
+	
+
+</body>
+</html>
